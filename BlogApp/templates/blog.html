@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block beforehead %} {% endblock %}
+
+{% block content %}
+
+    <div class="uk-width-medium-3-4">
+        <article class="uk-article">
+            <h2>{{ blog.title }}</h2>
+            <p class="uk-article-meta">发表于{{ blog.create_time }}</p>
+            <p>{{ blog.content }}</p>
+        </article>
+
+        <hr class="uk-article-divider">
+    </div>
+
+     <h3>最新评论</h3>
+
+        <ul class="uk-comment-list">
+            {% if not comments %}
+                <p>还没有人评论...</p>
+            {% else %}
+                {% for comment in comments %}
+                <li>
+                    <article class="uk-comment">
+                        <header class="uk-comment-header">
+                            <h4 class="uk-comment-title">{{ comment.user.name }} </h4>
+                            <p class="uk-comment-meta">{{ comment.create_time }}</p>
+                        </header>
+                        <div class="uk-comment-body">
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    </article>
+                </li>
+                {% endfor %}
+                {% endif %}
+        </ul>
+
+    <h3>发表评论</h3>
+        <form action="" method="POST">{% csrf_token %}
+            <input type="text" name="q" />
+            <input type="submit" value="comment" />
+        </form>
+        <hr class="uk-article-divider">
+{% endblock %}
