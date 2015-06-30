@@ -94,5 +94,5 @@ STATIC_URL = '/static/'
 # Template files
 
 TEMPLATE_DIRS = (
-    '/home/qy/study/Django/BlogApp/BlogApp/templates',
+    '/home/qy/code/project/BlogApp/BlogApp/templates',
 )
