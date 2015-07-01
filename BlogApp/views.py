@@ -19,14 +19,15 @@ def blog(request, id):
     comment = Comment.objects.filter(blog_id=id) # ??Is there any problem?
 
     if request.method == 'POST':
-        #form = UserInfo(request.POST)
-        #user = User(form.name, form.email, form.website)
-        #user.save()
-    #exception
-        #now = datetime.now()
-        #comment = Comment(user, blog, form.comment, now)
-        #comment.save()
-        c = RequestContext(request, {'blog': blog, 'comments': comment })
+        form = UserInfo(request.POST)
+        user = User(form.name, form.email, form.website)
+        user.save()
+    # exception
+        now = datetime.now()
+        comment = Comment(user, blog, form.comment, now)
+        comment.save()
+        c = RequestContext(request, {'blog': blog, 'comments': comment, 'form': form }) # add form
+        c.update(csrf(request))
         return render_to_response('blog.html', c)
     return render_to_response('blog.html', {'blog': blog, 'comments': comment})# To invoke insert func there.
     #if request.method == 'POST':
